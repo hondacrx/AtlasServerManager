@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Compile Update="CustomControls\ServerNode.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Update="CustomControls\ToggleButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Update="FormConfigEditor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormDatabase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormLogs.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormServers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+</Project>

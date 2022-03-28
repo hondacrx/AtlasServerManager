@@ -1,0 +1,22 @@
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\Atlas Server Manager.exe
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\Atlas Server Manager.deps.json
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\Atlas Server Manager.runtimeconfig.json
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\Atlas Server Manager.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\ref\Atlas Server Manager.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\Atlas Server Manager.pdb
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.csproj.GenerateResource.cache
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.AssemblyInfoInputs.cache
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.AssemblyInfo.cs
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.csproj.CoreCompileInputs.cache
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\ref\Atlas Server Manager.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.pdb
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.genruntimeconfig.cache
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\System.Windows.Forms.DataVisualization.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.csproj.CopyComplete
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\Atlas Server Manager.csproj.AssemblyReference.cache
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\System.CodeDom.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\System.Management.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Management.dll
+C:\Users\Mark\Desktop\Atlas Server Manager\Atlas Server Manager\obj\Debug\net6.0-windows\AtlasServerManager.Form1.resources
