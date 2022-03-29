@@ -14,7 +14,7 @@ namespace AtlasServerManager
 {
     public partial class FormServers : Form
     {
-        List<ServerNodeControl> serverNodes = new();
+        List<ServerNodeControl> serverNodes = new List<ServerNodeControl>();
 
         public FormServers()
         {
@@ -23,31 +23,17 @@ namespace AtlasServerManager
 
         private void FormServers_Load(object sender, EventArgs e)
         {
-            var servers = ServerGridParser.GetServers();
-            if (servers == null || servers.Length == 0)
+            serverNodes = Global.ServerMgr.GetServers();
+            if (serverNodes == null || serverNodes.Count == 0)
                 return;
 
-            foreach (var server in servers)
-            {
-                //todo load some of these from a file that keeps the info from last session
-
-                var serverNode = new ServerNode();
-                serverNode.Selected = true;
-                serverNode.Active = true;
-                serverNode.ServerName = server.name;
-                serverNode.Grid = $"{(char)(server.gridX + 65)}{server.gridY + 1}";
-                serverNode.SaveFolder = $"{(char)(server.gridX + 65)}{server.gridY + 1}";
-                serverNode.Status = ServerStatus.Off;
-                serverNodes.Add(new ServerNodeControl(serverNode));
-            }
-
-            flowLayoutPanel1.SuspendLayout();
+            flpServers.SuspendLayout();
 
             int selectedCount = 0;
             foreach (var server in serverNodes)
             {
                 //Add server nodes to the layoutpanel
-                flowLayoutPanel1.Controls.Add(server);
+                flpServers.Controls.Add(server);
 
                 if (server.IsSelected() && server.IsEnabled())
                     selectedCount++;
@@ -56,7 +42,7 @@ namespace AtlasServerManager
             bStartSelectedGrids.Text = $"Start({selectedCount})";
             bStopSelectedGrids.Text = $"Start({selectedCount})";
 
-            flowLayoutPanel1.ResumeLayout(false);
+            flpServers.ResumeLayout(false);
         }
 
         /// <summary>
@@ -103,7 +89,7 @@ namespace AtlasServerManager
 
             bStartSelectedGrids.Text = $"Start({count})";
             bStopSelectedGrids.Text = $"Start({count})";
-            flowLayoutPanel1.Refresh();
+            flpServers.Refresh();
         }
 
         /// <summary>

@@ -1,0 +1,42 @@
+{
+  "StartWithWindows": true,
+  "StartDelayInSecs": 5,
+  "StopDelayInSecs": 5,
+  "NumAttemptGameSave": 3,
+  "MaxSecsBeforeKillCommand": 30,
+  "DirectorySettings": {
+    "AtlasDirectory": "C:/AtlasSrv",
+    "AltSaveDirectoryType": 1,
+    "AltSaveDirectory": ""
+  },
+  "DatabaseConnectionSettings": {
+    "type": "Mysql",
+    "host": "127.0.0.1",
+    "port": 3306,
+    "username": "root",
+    "password": "password",
+    "database": "atlasservermanager"
+  },
+  "ServerSettings": {
+    "CommandLineArguments": "-log -server -servergamelog -NoBattleEye",
+    "AdminPassword": "",
+    "MaxPlayers": 20,
+    "ReservedSlots": 10,
+    "MapName": "ocean",
+    "StartServersAsService": true,
+    "StartServersMinimized": true,
+    "GridNamingScheme": null
+  },
+  "ModSettings": {
+    "ManageMods": false,
+    "ModDownloadTimeoutInMins": false,
+    "DetectModChanges": false,
+    "AutoInstallModChanges": false
+  },
+  "RconSettings": {
+    "RconIpAddress": null,
+    "UseGameUserSettingsPorts": false,
+    "RconPortsCustom": null
+  },
+  "SteamSettings": {}
+}

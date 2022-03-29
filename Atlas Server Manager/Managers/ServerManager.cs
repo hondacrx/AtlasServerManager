@@ -4,29 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using System.Diagnostics;
+using System.Text.RegularExpressions;
 
 namespace AtlasServerManager
 {
-    public class ServerGridParser
+    class ServerManager
     {
-        static JObject serverGrid;
+        List<ServerNodeControl> serverNodes = new();
+        Rootobject serverGrid;
 
-        public static void LoadFile(string fileName)
+        public bool ReadServerGridFile(string fileName)
         {
-            using StreamReader reader = File.OpenText(fileName);
-            serverGrid = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
-        }
-
-        public static Server[] GetServers()
-        {
+            serverGrid = JsonConvert.DeserializeObject<Rootobject>(File.ReadAllText(fileName));
             if (serverGrid == null)
-                return null;
+                return false;
 
-            return JsonSerializer.Create().Deserialize<Server[]>(serverGrid["servers"].CreateReader());
+            return true;
         }
 
+        public void LoadServers()
+        {
+            if (serverGrid.servers == null || serverGrid.servers.Length == 0)
+                return;
 
+            foreach (var server in serverGrid.servers)
+            {
+                //todo load some of these from a file that keeps the info from last session
+
+                var serverNode = new ServerNode();
+                serverNode.Selected = true;
+                serverNode.Active = true;
+                serverNode.ServerName = server.name;
+                serverNode.Grid = $"{(char)(server.gridX + 65)}{server.gridY + 1}";
+                serverNode.SaveFolder = $"{(char)(server.gridX + 65)}{server.gridY + 1}";
+                serverNode.Status = ServerStatus.Off;
+                serverNodes.Add(new ServerNodeControl(serverNode));
+            }
+
+            //find running servers
+            var runningServers = Process.GetProcessesByName("AtlasGame");
+            if (runningServers.Length > 0)
+            {
+                foreach (var process in runningServers)
+                {
+                    var m = Regex.Match(process.ProcessName, @"\[AltSaveDir=(.+)\]");
+
+                    //Find server in serverNodes
+                    var foundServer = serverNodes.Find(p => p.GetSaveFolder() == m.Value);
+                    if (foundServer == null)
+                    {
+                        //Cantfind server lets just close the process?
+                        process.Kill();
+                        continue;
+                    }
+
+                    foundServer.SetProcessId(process.Id);
+                    foundServer.SetStatus(ServerStatus.Running);
+                }
+            }
+        }
+
+        public List<ServerNodeControl> GetServers()
+        {
+            return serverNodes;
+        }
     }
 
     public class Rootobject

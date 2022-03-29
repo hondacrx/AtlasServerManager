@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.panelMenu = new System.Windows.Forms.Panel();
-            this.iconButton6 = new FontAwesome.Sharp.IconButton();
+            this.bSettings = new FontAwesome.Sharp.IconButton();
             this.bLogs = new FontAwesome.Sharp.IconButton();
             this.bDatabase = new FontAwesome.Sharp.IconButton();
             this.bConfigEditor = new FontAwesome.Sharp.IconButton();
@@ -59,7 +59,7 @@
             // panelMenu
             // 
             this.panelMenu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(31)))), ((int)(((byte)(30)))), ((int)(((byte)(68)))));
-            this.panelMenu.Controls.Add(this.iconButton6);
+            this.panelMenu.Controls.Add(this.bSettings);
             this.panelMenu.Controls.Add(this.bLogs);
             this.panelMenu.Controls.Add(this.bDatabase);
             this.panelMenu.Controls.Add(this.bConfigEditor);
@@ -71,26 +71,27 @@
             this.panelMenu.Size = new System.Drawing.Size(230, 750);
             this.panelMenu.TabIndex = 0;
             // 
-            // iconButton6
+            // bSettings
             // 
-            this.iconButton6.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.iconButton6.FlatAppearance.BorderSize = 0;
-            this.iconButton6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconButton6.ForeColor = System.Drawing.Color.Gainsboro;
-            this.iconButton6.IconChar = FontAwesome.Sharp.IconChar.SignOutAlt;
-            this.iconButton6.IconColor = System.Drawing.Color.Gainsboro;
-            this.iconButton6.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.iconButton6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton6.Location = new System.Drawing.Point(0, 690);
-            this.iconButton6.Name = "iconButton6";
-            this.iconButton6.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.iconButton6.Size = new System.Drawing.Size(230, 60);
-            this.iconButton6.TabIndex = 6;
-            this.iconButton6.Tag = "Exit";
-            this.iconButton6.Text = "Exit";
-            this.iconButton6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconButton6.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconButton6.UseVisualStyleBackColor = true;
+            this.bSettings.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.bSettings.FlatAppearance.BorderSize = 0;
+            this.bSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.bSettings.ForeColor = System.Drawing.Color.Gainsboro;
+            this.bSettings.IconChar = FontAwesome.Sharp.IconChar.Cog;
+            this.bSettings.IconColor = System.Drawing.Color.Gainsboro;
+            this.bSettings.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.bSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bSettings.Location = new System.Drawing.Point(0, 690);
+            this.bSettings.Name = "bSettings";
+            this.bSettings.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.bSettings.Size = new System.Drawing.Size(230, 60);
+            this.bSettings.TabIndex = 6;
+            this.bSettings.Tag = "Settings";
+            this.bSettings.Text = "Settings";
+            this.bSettings.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bSettings.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.bSettings.UseVisualStyleBackColor = true;
+            this.bSettings.Click += new System.EventHandler(this.bSettings_Click);
             // 
             // bLogs
             // 
@@ -229,7 +230,6 @@
             this.panelTitleBar.Name = "panelTitleBar";
             this.panelTitleBar.Size = new System.Drawing.Size(1082, 54);
             this.panelTitleBar.TabIndex = 1;
-            this.panelTitleBar.Paint += new System.Windows.Forms.PaintEventHandler(this.panelTitleBar_Paint);
             this.panelTitleBar.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelTitleBar_MouseDown);
             // 
             // groupBox1
@@ -391,6 +391,9 @@
             this.Controls.Add(this.panelMenu);
             this.Name = "FormMain";
             this.Text = "Main";
+            this.Load += new System.EventHandler(this.FormMain_Load);
+            this.Shown += new System.EventHandler(this.FormMain_Shown);
+            this.Enter += new System.EventHandler(this.FormMain_Enter);
             this.Resize += new System.EventHandler(this.Main_Resize);
             this.panelMenu.ResumeLayout(false);
             this.panelLogo.ResumeLayout(false);
@@ -411,7 +414,7 @@
         private FontAwesome.Sharp.IconButton bConfigEditor;
         private FontAwesome.Sharp.IconButton bServers;
         private Panel panelLogo;
-        private FontAwesome.Sharp.IconButton iconButton6;
+        private FontAwesome.Sharp.IconButton bSettings;
         private FontAwesome.Sharp.IconButton btnMenu;
         private FontAwesome.Sharp.IconButton btnClose;
         private FontAwesome.Sharp.IconButton iconButton9;

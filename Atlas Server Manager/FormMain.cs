@@ -7,11 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace AtlasServerManager
 {
     public partial class FormMain : Form
     {
+        public static AtlasServerManagerSettings Settings;
+        //public static AtlasServerManagerUserSettings UserSettings;
+
         //Fields
         private int borderSize = 2;
         private Size formSize; //Keep form size when it is minimized and restored.Since the form is resized because it takes into account the size of the title bar and borders.
@@ -21,19 +26,71 @@ namespace AtlasServerManager
 
         public FormMain()
         {
-            //this.Text = $"AtlasServerManager v{} | Atlas Version: {} | {}";
+            //this.Text = $"AtlasServerManager v1.0 | Atlas Version: {} | {}";
 
             InitializeComponent();
 
             CollapseMenu();
             Padding = new Padding(borderSize);//Border size
             BackColor = Color.FromArgb(98, 102, 244);//Border color
-
-            performanceInfo = new();
-            performanceInfo.UpdateEvent += PerformanceInfo_UpdateEvent;
-
-            ServerGridParser.LoadFile("ServerGrid.json");
         }
+
+        private void PreLoadStartup()
+        {
+            Settings = JsonConvert.DeserializeObject<AtlasServerManagerSettings>(File.ReadAllText("./AtlasServerManagerConfig.json"));
+            //UserSettings = JsonConvert.DeserializeObject<AtlasServerManagerUserSettings>(File.ReadAllText("./AtlasServerManagerUserConfig.json"));
+
+            //This is the first time manager has been ran.
+            //if (Settings == null || UserSettings == null)
+            {
+                //Setup the setting for the first time.
+                //FormSettings settings = new FormSettings();
+                //settings.Show();
+
+                //UserSettings = new AtlasServerManagerSettings();
+                //File.WriteAllText("./AtlasServerManagerUserConfig.json", JsonConvert.SerializeObject(UserSettings, Formatting.Indented));
+            }
+
+            //Shouldnt happen,  but maybe they deleted the file.
+            if (Settings == null)
+            {
+                MessageBox.Show("Can't find AtlasServerManagerConfig.json.");
+                OpenSettingsForm();
+                return;
+            }
+
+            //Shouldnt happen,  but maybe they deleted the file.
+            //if (UserSettings == null)
+            {
+                //MessageBox.Show("Can't find AtlasServerManagerUserConfig.json.");
+                //UserSettings = new AtlasServerManagerUserSettingsSettings();
+                //File.WriteAllText("./AtlasServerManagerUserConfig.json", JsonConvert.SerializeObject(UserSettings, Formatting.Indented));
+            }
+
+            //Check config to make sure we have the right folder
+            if (!Directory.Exists(Settings.DirectorySettings.AtlasDirectory))
+            {
+                MessageBox.Show("Can't find server directory");
+                OpenSettingsForm();
+                return;
+            }
+
+            if (!File.Exists($"{Settings.DirectorySettings.AtlasDirectory}/ServerGrid.json"))
+            {
+                MessageBox.Show("Can't find ServerGrid.json");
+                OpenSettingsForm();
+                return;
+            }
+
+            //Load servergrid.json and check for running servers
+            if (!Global.ServerMgr.ReadServerGridFile($"{Settings.DirectorySettings.AtlasDirectory}/ServerGrid.json"))
+            {
+                MessageBox.Show("Can't read ServerGrid.json");
+                OpenSettingsForm();
+                return;
+            }
+        }
+
 
         //Drag Form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -200,6 +257,12 @@ namespace AtlasServerManager
         }
 
         //Event methods
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            performanceInfo = new();
+            performanceInfo.UpdateEvent += PerformanceInfo_UpdateEvent;
+        }
+
         private void PerformanceInfo_UpdateEvent(string memory, string cpu)
         {
             this.Invoke(() => lMemoryPercent.Text = memory);
@@ -260,9 +323,26 @@ namespace AtlasServerManager
             OpenChildForm(new FormLogs());
         }
 
-        private void panelTitleBar_Paint(object sender, PaintEventArgs e)
+        private void bSettings_Click(object sender, EventArgs e)
         {
+            OpenSettingsForm();
+        }
 
+        private void OpenSettingsForm()
+        {
+            FormSettings settings = new FormSettings();
+            if (settings.ShowDialog() == DialogResult.OK)
+                PreLoadStartup();
+        }
+
+        private void FormMain_Enter(object sender, EventArgs e)
+        {
+            PreLoadStartup();
+        }
+
+        private void FormMain_Shown(object sender, EventArgs e)
+        {
+            PreLoadStartup();
         }
     }
 }

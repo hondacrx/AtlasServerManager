@@ -108,6 +108,11 @@ namespace AtlasServerManager
             listBox1.Items[4] = memoryMB;
         }
 
+        public string GetSaveFolder()
+        {
+            return (string)listBox1.Items[5];
+        }
+
         public int GetProcessId()
         {
             return (int)listBox1.Items[6];
